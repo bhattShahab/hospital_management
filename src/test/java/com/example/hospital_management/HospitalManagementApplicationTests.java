@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @SpringBootTest
@@ -21,8 +22,14 @@ class HospitalManagementApplicationTests {
 
 	@Test
 	void testingDBConnection(){
-		List<Patient>l = patientRepository.findAll();
+		List<Patient> l = patientRepository.findByName("manveer");
 		System.out.println(l);
+
+		List<Patient> l2 = patientRepository.findByBirthDateOrEmail(LocalDate.parse("2002-03-16"),"manveer@gmail.com");
+		System.out.println(l2);
+
+		List<Patient> l3 = patientRepository.findByNameContaining("Ran");
+		System.out.println(l3);
 	}
 
 }
