@@ -1,5 +1,6 @@
 package com.example.hospital_management.repository;
 
+import com.example.hospital_management.dto.BloodGroupCountResponseType;
 import com.example.hospital_management.entity.BloodGroupType;
 import com.example.hospital_management.entity.Patient;
 import jakarta.transaction.Transactional;
@@ -25,6 +26,11 @@ public interface PatientRepository extends JpaRepository<Patient,Long> {
 
     @Query("select p.bloodGroup , count(p) from Patient p group by p.bloodGroup")
     List<Object[]> countEachBloodGroupType();
+
+//    Note: This is not possible with native query
+    @Query("select new com.example.hospital_management.dto.BloodGroupCountResponseType(p.bloodGroup,count(p)) from Patient p group by p.bloodGroup")
+    List<BloodGroupCountResponseType> countEachBloodGroupType2();
+
 
     @Query(value = "select * from patient", nativeQuery = true)
     List<Patient> findAllPatients();

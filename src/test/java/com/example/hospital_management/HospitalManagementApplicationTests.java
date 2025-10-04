@@ -1,5 +1,6 @@
 package com.example.hospital_management;
 
+import com.example.hospital_management.dto.BloodGroupCountResponseType;
 import com.example.hospital_management.entity.BloodGroupType;
 import com.example.hospital_management.entity.Patient;
 import com.example.hospital_management.repository.PatientRepository;
@@ -63,6 +64,13 @@ class HospitalManagementApplicationTests {
 
 		System.out.println(rowsUpdated);
 
+
+
+		List<BloodGroupCountResponseType> l8 = patientRepository.countEachBloodGroupType2();
+
+		for(BloodGroupCountResponseType br: l8){
+			System.out.println(br);
+		}
 
 	}
 
