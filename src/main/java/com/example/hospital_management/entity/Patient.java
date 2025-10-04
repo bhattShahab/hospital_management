@@ -2,6 +2,7 @@ package com.example.hospital_management.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -26,8 +27,17 @@ public class Patient {
 
     private String gender;
 
+    @CreationTimestamp
+    @Column(updatable = false)
+    private LocalDateTime createdAt;
+
     @Enumerated(EnumType.STRING)
     private BloodGroupType bloodGroup;
+
+
+    @OneToOne
+    @JoinColumn(name="patient_insurance_id") //owning side
+    private Insurance insurance;
 
 
 }
