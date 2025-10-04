@@ -4,6 +4,8 @@ import com.example.hospital_management.dto.BloodGroupCountResponseType;
 import com.example.hospital_management.entity.BloodGroupType;
 import com.example.hospital_management.entity.Patient;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -34,6 +36,10 @@ public interface PatientRepository extends JpaRepository<Patient,Long> {
 
     @Query(value = "select * from patient", nativeQuery = true)
     List<Patient> findAllPatients();
+
+    //need to pass this pageable to get response in chunks
+    @Query(value= "select * from patient", nativeQuery = true)
+    Page<Patient> findAllPatientsWithPageable(Pageable pageable);
 
     @Transactional //need to use Transactional with Modifying
     @Modifying

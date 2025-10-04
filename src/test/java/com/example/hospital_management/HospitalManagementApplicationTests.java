@@ -9,6 +9,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.aop.scope.ScopedProxyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -70,6 +74,11 @@ class HospitalManagementApplicationTests {
 
 		for(BloodGroupCountResponseType br: l8){
 			System.out.println(br);
+		}
+
+		Page<Patient> l9 = patientRepository.findAllPatientsWithPageable(PageRequest.of(0,2,Sort.by("name")));
+		for(Patient pa : l9){
+			System.out.println(pa);
 		}
 
 	}
