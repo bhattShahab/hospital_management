@@ -6,7 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Data
@@ -30,4 +32,10 @@ public class Doctor {
 
     @OneToMany(mappedBy = "doctor") // inverse side
     private List<Appointment> appointment;
+
+    @ManyToMany(mappedBy = "doctors")
+    private Set<Department> departments= new HashSet<>();
+
+    @OneToOne(mappedBy = "headDoctor")
+    private Department department ;
 }
