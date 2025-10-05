@@ -2,8 +2,10 @@ package com.example.hospital_management;
 
 import com.example.hospital_management.dto.BloodGroupCountResponseType;
 import com.example.hospital_management.entity.BloodGroupType;
+import com.example.hospital_management.entity.Insurance;
 import com.example.hospital_management.entity.Patient;
 import com.example.hospital_management.repository.PatientRepository;
+import com.example.hospital_management.service.InsuranceService;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.aop.scope.ScopedProxyUtils;
@@ -80,6 +82,23 @@ class HospitalManagementApplicationTests {
 		for(Patient pa : l9){
 			System.out.println(pa);
 		}
+
+	}
+
+	@Autowired
+	private InsuranceService insuranceService;
+
+	@Test
+	void TestInsurance(){
+		Insurance insurance = Insurance.builder()
+				.policyNumber("aksh_1237")
+				.provider("akash bhai")
+				.validUntil(LocalDate.of(2027,10,16))
+				.build();
+
+		Patient patient=insuranceService.assignInsuranceToPatient(insurance,4L);
+
+		System.out.println(patient);
 
 	}
 

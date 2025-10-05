@@ -2,9 +2,7 @@ package com.example.hospital_management.entity;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
@@ -14,6 +12,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Insurance {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,6 +32,7 @@ public class Insurance {
     @Column(nullable = false,updatable = false)
     private LocalDateTime createdAt;
 
+    @ToString.Exclude
     @OneToOne(mappedBy = "insurance") //inverse side
     private Patient patient;
 }

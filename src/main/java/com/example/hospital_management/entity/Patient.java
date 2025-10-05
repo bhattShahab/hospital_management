@@ -2,6 +2,8 @@ package com.example.hospital_management.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.ToString;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
@@ -36,10 +38,11 @@ public class Patient {
     private BloodGroupType bloodGroup;
 
 
-    @OneToOne
+    @OneToOne(cascade= {CascadeType.MERGE,CascadeType.PERSIST})
     @JoinColumn(name="patient_insurance_id") //owning side
     private Insurance insurance;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "patient") //Inverse side
     private List<Appointment> appointment;
 
